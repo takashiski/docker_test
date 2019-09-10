@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: vvakame/review:2.5
+    steps:
+      - checkout
+      - run:
+          name: Build PDF
+          command: rake clean pdf
+          working_directory: ./articles
+      - store_artifacts:
+          path: ./articles/book.pdf
+          destination: book.pdf
+          #      - run:
+          #name: Upload to Dropbox
+          #command: ./upload_dropbox.sh ./articles/book.pdf ${DROPBOX_TOKEN}
